@@ -92,7 +92,26 @@ load() const
     source  = new char[length];
 
     input.read(source,length);
+
+    if(input.gcount() != length)
+    {
+      std::cerr << std::endl
+                << "failed to load " << path_
+                << std::endl;
+
+      delete[] source;
+
+      source = nullptr;
+    }    
+
     input.close();
+  }
+
+  else
+  {
+    std::cerr << std::endl
+              << "file " << path_ << " doesn't exist"
+              << std::endl;
   }
 
   return source;
@@ -158,6 +177,20 @@ recognize_type() const
     if     (suffix.compare("vert") == 0) type = GL_VERTEX_SHADER;
     else if(suffix.compare("geom") == 0) type = GL_GEOMETRY_SHADER;
     else if(suffix.compare("frag") == 0) type = GL_FRAGMENT_SHADER;
+
+    else
+    {
+      std::cerr << std::endl
+                << "invalid stage suffix : " << path_
+                << std::endl;
+    }
+  }
+
+  else
+  {
+      std::cerr << std::endl
+                << "missing stage suffix : " << path_
+                << std::endl;
   }
 
   return type;

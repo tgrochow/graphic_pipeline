@@ -1,6 +1,10 @@
-g++ test.cpp\
+clang++ test.cpp\
+ source/stage.cpp\
  -otest\
- -std=c++1y\
+ -std=c++11\
  -Wall\
  -pedantic\
- -Iinclude
+ -Iinclude\
+ -lGLEW -lglut\
+ -L/usr/lib/nvidia-331\
+ -lGL
