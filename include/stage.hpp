@@ -16,6 +16,10 @@ class stage
 
   GLuint compile();
 
+  // get methods
+  GLuint id()   const;
+  GLenum type() const;
+
   void clear();
 
 

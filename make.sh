@@ -1,4 +1,5 @@
 clang++ test.cpp\
+ source/program.cpp\
  source/stage.cpp\
  -otest\
  -std=c++11\

@@ -60,6 +60,18 @@ compile()
   return id_;
 }
 
+// get stage id
+GLenum stage::id() const
+{
+  return id_;
+}
+
+// get stage type
+GLenum stage::type() const
+{
+  return type_;
+}
+
 // delete shader object
 void stage::
 
@@ -84,25 +96,29 @@ load() const
 
   if(input.good())
   {
+    unsigned short length(0);
+
     input.seekg(0,input.end);
-    std::streampos length(input.tellg());
+    length = input.tellg();
     input.seekg(0,input.beg);
 
-    length -= 1;
-    source  = new char[length];
-
-    input.read(source,length);
-
-    if(input.gcount() != length)
+    if(length != 0)
     {
-      std::cerr << std::endl
-                << "failed to load " << path_
-                << std::endl;
+      source = new char[length - 1];
 
-      delete[] source;
+      input.get(source,length,EOF);
 
-      source = nullptr;
-    }    
+      if(input.gcount() != length - 1)
+      {
+        std::cerr << std::endl
+                  << "failed to load " << path_
+                  << std::endl;
+
+        delete[] source;
+
+        source = nullptr;
+      }
+    }
 
     input.close();
   }
