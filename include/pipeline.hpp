@@ -1,23 +1,42 @@
 #ifndef PIPELINE_HPP
 #define PIPELINE_HPP
 
-// project
 #include <program.hpp>
+#include <uniform_map.hpp>
 
-// std
-#include <map>
 #include <vector>
+
+typedef std::vector<program>::iterator program_iterator;
+
+typedef std::vector<std::shared_ptr<stage> >::iterator stage_iterator;
 
 class pipeline
 {
   public :
 
-  void add_program(std::string const&,std::vector<std::string> const&);
+  void enable(std::string const&);
+
+  void add_program(std::string const&);
+
+  void set_stage(std::string const&,std::string const&);
+
+  void set_link(std::string const&,std::string const&);
+
+  void link_programs();
+
+  uniform_map uniforms_;
 
   private :
 
-  std::map<std::string,program> programs_;
-  std::map<std::string,std::shared_ptr<stage> > stages_;
+  program_iterator const find_program(std::string const&);
+
+  stage_iterator const find_stage(std::string const&);
+
+  std::vector<program> programs_;
+
+  std::vector<std::shared_ptr<stage> > stages_;
+
+  std::vector<uniform_link> links_;
 };
 
 #endif

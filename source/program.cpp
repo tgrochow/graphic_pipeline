@@ -1,10 +1,7 @@
-// header
 #include <program.hpp>
 
-// std
 #include <iostream>
 
-// user constructor
 program::
 
 program(std::string const& name) :
@@ -13,7 +10,6 @@ name_(name),
 stages_()
 {}
 
-// destructor
 program::
 
 ~program()
@@ -21,7 +17,6 @@ program::
   clear();
 }
 
-// load, compile, link to a program
 void program::
 
 link()
@@ -51,7 +46,6 @@ link()
   }
 }
 
-// reset shading stage
 void program::
 
 reset_stage(GLenum type)
@@ -75,7 +69,6 @@ reset_stage(GLenum type)
   }
 }
 
-// define one stage of the pipeline
 void program::
 
 define_stage(std::shared_ptr<stage> & stage_ptr)
@@ -99,6 +92,15 @@ define_stage(std::shared_ptr<stage> & stage_ptr)
   }
 }
 
+bool program::
+
+equal(std::string const& name) const
+{
+  if(name_.compare(name) == 0) return true;
+
+  return false;
+}
+
 // get program id
 GLuint program::
 
@@ -117,7 +119,6 @@ clear()
   id_ = 0;
 }
 
-// detach, clear shading objects
 void program::
 
 clear_stages() const
@@ -135,7 +136,6 @@ clear_stages() const
   }
 }
 
-// write program link feedback in error stream
 bool program::
 
 link_feedback() const

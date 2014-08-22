@@ -1,10 +1,8 @@
 #ifndef PROGRAM_HPP
 #define PROGRAM_HPP
 
-// project
 #include <stage.hpp>
 
-// std
 #include <array>
 #include <memory>
 
@@ -20,7 +18,8 @@ class program
   void reset_stage(GLenum);
   void define_stage(std::shared_ptr<stage> &);
 
-  // get methods
+  bool equal(std::string const&) const;
+
   GLuint id() const;
 
 
@@ -31,7 +30,6 @@ class program
 
   bool link_feedback() const;
 
-  // member
   GLuint      id_;
   std::string name_;
 

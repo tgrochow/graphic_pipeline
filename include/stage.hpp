@@ -1,10 +1,8 @@
 #ifndef STAGE_HPP
 #define STAGE_HPP
 
-// std
 #include <string>
 
-// openGL
 #include <GL/glew.h>
 
 class stage
@@ -16,7 +14,8 @@ class stage
 
   GLuint compile();
 
-  // get methods
+  bool equal(std::string const&) const;
+
   GLuint id()   const;
   GLenum type() const;
 
@@ -31,7 +30,6 @@ class stage
 
   GLenum recognize_type() const;
 
-  // member
   GLuint      id_;
   GLenum      type_;
   std::string path_;

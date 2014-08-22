@@ -1,11 +1,8 @@
-// header
 #include <stage.hpp>
 
-// std
 #include <iostream>
 #include <fstream>
 
-// user constructor
 stage::
 
 stage(std::string const& path) :
@@ -16,7 +13,6 @@ path_(path)
   type_ = recognize_type();
 }
 
-// destructor
 stage::
 
 ~stage()
@@ -24,7 +20,6 @@ stage::
   clear();
 }
 
-// load, compile stage source code
 GLuint stage::
 
 compile()
@@ -60,19 +55,25 @@ compile()
   return id_;
 }
 
-// get stage id
+bool stage::
+
+equal(std::string const& path) const
+{
+  if(path_.compare(path) == 0) return true;
+
+  return false;
+}
+
 GLenum stage::id() const
 {
   return id_;
 }
 
-// get stage type
 GLenum stage::type() const
 {
   return type_;
 }
 
-// delete shader object
 void stage::
 
 clear()
@@ -85,7 +86,6 @@ clear()
   }
 }
 
-// load stage source code
 const GLchar* const stage::
 
 load() const
@@ -133,7 +133,6 @@ load() const
   return source;
 }
 
-// write shader compile feedback in error stream
 bool stage::
 
 compile_feedback() const
@@ -173,7 +172,6 @@ compile_feedback() const
   }
 }
 
-// identify stage type
 GLenum stage::
 
 recognize_type() const

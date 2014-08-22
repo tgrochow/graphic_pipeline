@@ -28,13 +28,19 @@ int main(int argc,char ** argv)
   {
     pipeline p;
 
-    std::vector<std::string> stage_path(3);
+    p.add_program("triangle");
 
-    stage_path[0] = "shader/pass.vert";
-    stage_path[1] = "shader/glyph.geom";
-    stage_path[2] = "shader/phong.frag";
+    p.set_stage("triangle","shader/pass.vert");
+    p.set_stage("triangle","shader/glyph.geom");
+    p.set_stage("triangle","shader/phong.frag");
 
-    p.add_program("test",stage_path);
+    p.link_programs();
+
+    p.uniforms_.set("view",glm::mat4(1.0));
+
+    p.set_link("triangle","view");
+
+    p.enable("triangle");
   }
 
   return 0;

@@ -1,16 +1,17 @@
-// header
 #include <uniform_map.hpp>
 
-// std
 #include <iostream>
 
-// openGL
 #include <glm/gtc/type_ptr.hpp>
 
 void uniform_map::
 
-load_uniform(GLuint program_id , std::string const& uniform_name) const
+load(uniform_link const& ul) const
 {
+  GLuint program_id(ul.program_id_);
+
+  std::string uniform_name(ul.uniform_name_);
+
   auto name_it(names_.find(uniform_name));
 
   if(name_it != names_.end())
@@ -71,7 +72,7 @@ load_uniform(GLuint program_id , std::string const& uniform_name) const
 
 void uniform_map::
 
-set_uniform(std::string const& name , glm::vec2 const& uniform)
+set(std::string const& name , glm::vec2 const& uniform)
 {
   std::shared_ptr<std::string> key(name_ptr(name));
 
@@ -92,7 +93,7 @@ set_uniform(std::string const& name , glm::vec2 const& uniform)
 
 void uniform_map::
 
-set_uniform(std::string const& name , glm::vec3 const& uniform)
+set(std::string const& name , glm::vec3 const& uniform)
 {
   std::shared_ptr<std::string> key(name_ptr(name));
 
@@ -113,7 +114,7 @@ set_uniform(std::string const& name , glm::vec3 const& uniform)
 
 void uniform_map::
 
-set_uniform(std::string const& name , glm::ivec3 const& uniform)
+set(std::string const& name , glm::ivec3 const& uniform)
 {
   std::shared_ptr<std::string> key(name_ptr(name));
 
@@ -134,13 +135,13 @@ set_uniform(std::string const& name , glm::ivec3 const& uniform)
 
 void uniform_map::
 
-set_uniform(std::string const& name , glm::mat4 const& uniform)
+set(std::string const& name , glm::mat4 const& uniform)
 {
   std::shared_ptr<std::string> key(name_ptr(name));
 
   auto uniform_it(mat4_.find(key));
 
-  if(uniform_it != mat4_.end())
+  if(uniform_it == mat4_.end())
   {
     mat4_.emplace(key,uniform);
 
@@ -151,6 +152,17 @@ set_uniform(std::string const& name , glm::mat4 const& uniform)
   {
     uniform_it->second = uniform;
   }
+}
+
+bool uniform_map::
+
+aviable(std::string const& uniform_name) const
+{
+  auto name_it(names_.find(uniform_name));
+
+  if(name_it != names_.end()) return true;
+
+  return false;
 }
 
 std::shared_ptr<std::string> const uniform_map::
