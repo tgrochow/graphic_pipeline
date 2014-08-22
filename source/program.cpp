@@ -13,17 +13,20 @@ name_(name),
 stages_()
 {}
 
+// destructor
+program::
+
+~program()
+{
+  clear();
+}
+
 // load, compile, link to a program
 void program::
 
 link()
 {
-  if(id_ != 0)
-  {
-    glDeleteProgram(id_);
-
-    id_ = 0;
-  }
+  if(id_ != 0) clear();
 
   id_ = glCreateProgram();
 
@@ -37,15 +40,14 @@ link()
       {
         GLuint stage_id(stage_ptr->compile());
 
-        if(stage_id != 0)
-        {
-          glAttachShader(id_,stage_id);
-        }
+        if(stage_id != 0) glAttachShader(id_,stage_id);
       }
     }
 
     glLinkProgram(id_);
-    clear();
+    clear_stages();
+
+    if(!link_feedback()) clear();
   }
 }
 
@@ -97,10 +99,20 @@ define_stage(std::shared_ptr<stage> & stage_ptr)
   }
 }
 
+// reset program
+void program::
+
+clear()
+{
+  glDeleteProgram(id_);
+
+  id_ = 0;
+}
+
 // detach, clear shading objects
 void program::
 
-clear() const
+clear_stages() const
 {
   for(auto it(stages_.begin()) ; it != stages_.end() ; ++it)
   {
@@ -108,12 +120,49 @@ clear() const
 
     if(stage_ptr != nullptr)
     {
-      if(id_ != 0)
-      {
-        glDetachShader(id_,stage_ptr->id());
-      }
+      if(id_ != 0) glDetachShader(id_,stage_ptr->id());
 
       stage_ptr->clear();
     }
+  }
+}
+
+// write program link feedback in error stream
+bool program::
+
+link_feedback() const
+{
+  GLint link_status(GL_FALSE);
+
+  glGetProgramiv(id_,GL_LINK_STATUS,&link_status);
+
+  if(link_status != GL_TRUE)
+  {
+    GLint   length(0);
+    GLchar* info_buffer(nullptr);
+
+    glGetProgramiv(id_,GL_INFO_LOG_LENGTH,&length);
+
+    if(length != 0)
+    {
+      info_buffer = new GLchar[length];
+
+      glGetProgramInfoLog(id_,length,&length,info_buffer);
+
+      std::cerr << std::endl
+                << "[" << name_ << "]"
+                << std::endl << std::endl
+                << "line " << info_buffer
+                << std::endl;
+
+      delete[] info_buffer;
+    }
+
+    return false;
+  }
+
+  else
+  {
+    return true;
   }
 }

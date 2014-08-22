@@ -13,6 +13,7 @@ class program
   public :
 
   program(std::string const&);
+  ~program();
 
   void link();
 
@@ -22,7 +23,10 @@ class program
 
   private :
 
-  void clear() const;
+  void clear();
+  void clear_stages() const;
+
+  bool link_feedback() const;
 
   // member
   GLuint      id_;
