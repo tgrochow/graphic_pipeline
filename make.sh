@@ -1,4 +1,5 @@
 clang++ test.cpp\
+ source/pipeline.cpp\
  source/program.cpp\
  source/stage.cpp\
  -otest\

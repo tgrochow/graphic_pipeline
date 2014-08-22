@@ -1,9 +1,8 @@
 // project
-#include <program.hpp>
+#include <pipeline.hpp>
 
 // std
 #include <iostream>
-#include <memory>
 
 // openGL
 #include <GL/freeglut.h>
@@ -27,23 +26,15 @@ int main(int argc,char ** argv)
 
   else
   {
-    stage v("shader/pass.vert"),
-          g("shader/glyph.geom"),
-          f("shader/phong.frag");
+    pipeline p;
 
-    std::shared_ptr<stage> v_ptr(std::make_shared<stage>(v)),
-                           g_ptr(std::make_shared<stage>(g)),
-                           f_ptr(std::make_shared<stage>(f));
+    std::vector<std::string> stage_path(3);
 
-    program p("test");
+    stage_path[0] = "shader/pass.vert";
+    stage_path[1] = "shader/glyph.geom";
+    stage_path[2] = "shader/phong.frag";
 
-    p.define_stage(v_ptr);
-    p.define_stage(g_ptr);
-    p.define_stage(f_ptr);
-
-    p.link();
-
-    p.reset_stage(GL_GEOMETRY_SHADER);
+    p.add_program("test",stage_path);
   }
 
   return 0;

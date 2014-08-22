@@ -99,6 +99,14 @@ define_stage(std::shared_ptr<stage> & stage_ptr)
   }
 }
 
+// get program id
+GLuint program::
+
+id() const
+{
+  return id_;
+}
+
 // reset program
 void program::
 

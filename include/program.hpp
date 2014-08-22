@@ -20,6 +20,9 @@ class program
   void reset_stage(GLenum);
   void define_stage(std::shared_ptr<stage> &);
 
+  // get methods
+  GLuint id() const;
+
 
   private :
 
