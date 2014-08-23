@@ -79,7 +79,9 @@ set_stage(std::string const& program_name , std::string const& stage_path)
 
     else
     {
-      p_it->define_stage(*s_it);
+      std::shared_ptr<stage> s(*s_it);
+
+      p_it->define_stage(s);
     }
   }
 
