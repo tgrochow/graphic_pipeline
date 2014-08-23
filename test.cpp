@@ -6,6 +6,7 @@
 
 // openGL
 #include <GL/freeglut.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 int main(int argc,char ** argv)
 {
@@ -28,19 +29,20 @@ int main(int argc,char ** argv)
   {
     pipeline p;
 
-    p.add_program("triangle");
+    p.uniforms_.set("projection",glm::perspective(45.0f,1.25f,0.1f,100.0f));
+    p.uniforms_.set("view",glm::mat4(1.0f));
 
-    p.set_stage("triangle","shader/pass.vert");
-    p.set_stage("triangle","shader/glyph.geom");
-    p.set_stage("triangle","shader/phong.frag");
+    p.add_program("example");
+
+    p.set_stage("example","stage/simple.vert");
+    p.set_stage("example","stage/simple.frag");
 
     p.link_programs();
 
-    p.uniforms_.set("view",glm::mat4(1.0));
+    p.set_link("example","projection");
+    p.set_link("example","view");
 
-    p.set_link("triangle","view");
-
-    p.enable("triangle");
+    p.enable("example");
   }
 
   return 0;

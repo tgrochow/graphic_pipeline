@@ -38,14 +38,15 @@ class uniform_map
 
   private :
 
-  std::shared_ptr<std::string> const name_ptr(std::string const&);
+  std::shared_ptr<unsigned short> const id(std::string const&);
 
-  std::map<std::string,std::shared_ptr<std::string> > names_;
-  std::map<std::shared_ptr<std::string>,uniform_type> types_;
-  std::map<std::shared_ptr<std::string>,glm::vec2>    vec2_;
-  std::map<std::shared_ptr<std::string>,glm::vec3>    vec3_;
-  std::map<std::shared_ptr<std::string>,glm::ivec3>   ivec3_;
-  std::map<std::shared_ptr<std::string>,glm::mat4>    mat4_;
+  std::map<std::string,std::shared_ptr<unsigned short> > names_;
+  std::map<std::shared_ptr<unsigned short>,uniform_type> types_;
+
+  std::map<std::shared_ptr<unsigned short>,glm::vec2>    vec2_;
+  std::map<std::shared_ptr<unsigned short>,glm::vec3>    vec3_;
+  std::map<std::shared_ptr<unsigned short>,glm::ivec3>   ivec3_;
+  std::map<std::shared_ptr<unsigned short>,glm::mat4>    mat4_;
 };
 
 #endif

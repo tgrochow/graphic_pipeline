@@ -74,7 +74,7 @@ void uniform_map::
 
 set(std::string const& name , glm::vec2 const& uniform)
 {
-  std::shared_ptr<std::string> key(name_ptr(name));
+  std::shared_ptr<unsigned short> key(id(name));
 
   auto uniform_it(vec2_.find(key));
 
@@ -95,7 +95,7 @@ void uniform_map::
 
 set(std::string const& name , glm::vec3 const& uniform)
 {
-  std::shared_ptr<std::string> key(name_ptr(name));
+  std::shared_ptr<unsigned short> key(id(name));
 
   auto uniform_it(vec3_.find(key));
 
@@ -116,7 +116,7 @@ void uniform_map::
 
 set(std::string const& name , glm::ivec3 const& uniform)
 {
-  std::shared_ptr<std::string> key(name_ptr(name));
+  std::shared_ptr<unsigned short> key(id(name));
 
   auto uniform_it(ivec3_.find(key));
 
@@ -137,7 +137,7 @@ void uniform_map::
 
 set(std::string const& name , glm::mat4 const& uniform)
 {
-  std::shared_ptr<std::string> key(name_ptr(name));
+  std::shared_ptr<unsigned short> key(id(name));
 
   auto uniform_it(mat4_.find(key));
 
@@ -165,25 +165,25 @@ aviable(std::string const& uniform_name) const
   return false;
 }
 
-std::shared_ptr<std::string> const uniform_map::
+std::shared_ptr<unsigned short> const uniform_map::
 
-name_ptr(std::string const& name)
+id(std::string const& name)
 {
-  std::shared_ptr<std::string> name_ptr;
+  std::shared_ptr<unsigned short> id_ptr;
 
   auto name_it(names_.find(name));
 
   if(name_it == names_.end())
   {
-    name_ptr = std::make_shared<std::string>(name);
+    id_ptr = std::make_shared<unsigned short>(names_.size());
 
-    names_.emplace(name,name_ptr);
+    names_.emplace(name,id_ptr);
   }
 
   else
   {
-    name_ptr = name_it->second;
+    id_ptr = name_it->second;
   }
 
-  return name_ptr;
+  return id_ptr;
 }
