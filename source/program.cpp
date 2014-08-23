@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+
 program::
 
 program(std::string const& name) :
@@ -10,12 +11,14 @@ name_(name),
 stages_()
 {}
 
+
 program::
 
 ~program()
 {
   clear();
 }
+
 
 void program::
 
@@ -46,6 +49,7 @@ link()
   }
 }
 
+
 void program::
 
 reset_stage(GLenum type)
@@ -68,6 +72,7 @@ reset_stage(GLenum type)
     break;
   }
 }
+
 
 void program::
 
@@ -92,6 +97,7 @@ define_stage(std::shared_ptr<stage> & stage_ptr)
   }
 }
 
+
 bool program::
 
 equal(std::string const& name) const
@@ -101,7 +107,7 @@ equal(std::string const& name) const
   return false;
 }
 
-// get program id
+
 GLuint program::
 
 id() const
@@ -109,7 +115,7 @@ id() const
   return id_;
 }
 
-// reset program
+
 void program::
 
 clear()
@@ -118,6 +124,7 @@ clear()
 
   id_ = 0;
 }
+
 
 void program::
 
@@ -135,6 +142,7 @@ clear_stages() const
     }
   }
 }
+
 
 bool program::
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 
+
 stage::
 
 stage(std::string const& path) :
@@ -13,12 +14,14 @@ path_(path)
   type_ = recognize_type();
 }
 
+
 stage::
 
 ~stage()
 {
   clear();
 }
+
 
 GLuint stage::
 
@@ -55,6 +58,7 @@ compile()
   return id_;
 }
 
+
 bool stage::
 
 equal(std::string const& path) const
@@ -64,15 +68,22 @@ equal(std::string const& path) const
   return false;
 }
 
-GLenum stage::id() const
+
+GLenum stage::
+
+id() const
 {
   return id_;
 }
 
-GLenum stage::type() const
+
+GLenum stage::
+
+type() const
 {
   return type_;
 }
+
 
 void stage::
 
@@ -85,6 +96,7 @@ clear()
     id_ = 0;
   }
 }
+
 
 const GLchar* const stage::
 

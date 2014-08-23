@@ -4,6 +4,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
+
 void uniform_map::
 
 load(uniform_link const& ul) const
@@ -70,6 +71,7 @@ load(uniform_link const& ul) const
   }
 }
 
+
 void uniform_map::
 
 set(std::string const& name , glm::vec2 const& uniform)
@@ -80,9 +82,19 @@ set(std::string const& name , glm::vec2 const& uniform)
 
   if(uniform_it == vec2_.end())
   {
-    vec2_.emplace(key,uniform);
+    if(types_.find(key) == types_.end())
+    {
+      vec2_.emplace(key,uniform);
 
-    types_.emplace(key,VEC2);
+      types_.emplace(key,VEC2);
+    }
+
+    else
+    {
+      std::cerr << std::endl
+                << "uniform [" << name << "] is already bound"
+                << std::endl;
+    }
   }
 
   else
@@ -90,6 +102,7 @@ set(std::string const& name , glm::vec2 const& uniform)
     uniform_it->second = uniform;
   }
 }
+
 
 void uniform_map::
 
@@ -101,9 +114,19 @@ set(std::string const& name , glm::vec3 const& uniform)
 
   if(uniform_it == vec3_.end())
   {
-    vec3_.emplace(key,uniform);
+    if(types_.find(key) == types_.end())
+    {
+      vec3_.emplace(key,uniform);
 
-    types_.emplace(key,VEC3);
+      types_.emplace(key,VEC3);
+    }
+
+    else
+    {
+      std::cerr << std::endl
+                << "uniform [" << name << "] is already bound"
+                << std::endl;
+    }
   }
 
   else
@@ -111,6 +134,7 @@ set(std::string const& name , glm::vec3 const& uniform)
     uniform_it->second = uniform;
   }
 }
+
 
 void uniform_map::
 
@@ -122,9 +146,19 @@ set(std::string const& name , glm::ivec3 const& uniform)
 
   if(uniform_it == ivec3_.end())
   {
-    ivec3_.emplace(key,uniform);
+    if(types_.find(key) == types_.end())
+    {
+      ivec3_.emplace(key,uniform);
 
-    types_.emplace(key,IVEC3);
+      types_.emplace(key,IVEC3);
+    }
+
+    else
+    {
+      std::cerr << std::endl
+                << "uniform [" << name << "] is already bound"
+                << std::endl;
+    }
   }
 
   else
@@ -132,6 +166,7 @@ set(std::string const& name , glm::ivec3 const& uniform)
     uniform_it->second = uniform;
   }
 }
+
 
 void uniform_map::
 
@@ -143,9 +178,19 @@ set(std::string const& name , glm::mat4 const& uniform)
 
   if(uniform_it == mat4_.end())
   {
-    mat4_.emplace(key,uniform);
+    if(types_.find(key) == types_.end())
+    {
+      mat4_.emplace(key,uniform);
 
-    types_.emplace(key,MAT4);
+      types_.emplace(key,MAT4);
+    }
+
+    else
+    {
+      std::cerr << std::endl
+                << "uniform [" << name << "] is already bound"
+                << std::endl;
+    }
   }
 
   else
@@ -153,6 +198,7 @@ set(std::string const& name , glm::mat4 const& uniform)
     uniform_it->second = uniform;
   }
 }
+
 
 bool uniform_map::
 
@@ -164,6 +210,7 @@ aviable(std::string const& uniform_name) const
 
   return false;
 }
+
 
 std::shared_ptr<unsigned short> const uniform_map::
 

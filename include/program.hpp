@@ -6,6 +6,7 @@
 #include <array>
 #include <memory>
 
+
 class program
 {
   public :
@@ -24,6 +25,7 @@ class program
 
   GLuint id() const;
 
+
   private :
 
   void clear();
@@ -31,6 +33,7 @@ class program
   void clear_stages() const;
 
   bool link_feedback() const;
+
 
   GLuint id_;
 

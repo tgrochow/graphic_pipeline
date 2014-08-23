@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+
 void pipeline::
 
 enable(std::string const& program_name)
@@ -36,6 +37,7 @@ enable(std::string const& program_name)
   }
 }
 
+
 void pipeline::
 
 add_program(std::string const& name)
@@ -54,6 +56,7 @@ add_program(std::string const& name)
               << std::endl;
   }
 }
+
 
 void pipeline::
 
@@ -87,6 +90,7 @@ set_stage(std::string const& program_name , std::string const& stage_path)
               << std::endl;
   }
 }
+
 
 void pipeline::
 
@@ -127,6 +131,7 @@ set_link(std::string const& program_name , std::string const& uniform_name)
   }
 }
 
+
 void pipeline::
 
 link_programs()
@@ -136,6 +141,7 @@ link_programs()
     p_it->link();
   }
 }
+
 
 program_iterator const pipeline::
 
@@ -150,6 +156,7 @@ find_program(std::string const& name)
 
   return p_it;
 }
+
 
 stage_iterator const pipeline::
 

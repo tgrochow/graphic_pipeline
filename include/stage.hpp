@@ -5,6 +5,7 @@
 
 #include <GL/glew.h>
 
+
 class stage
 {
   public :
@@ -23,6 +24,7 @@ class stage
 
   void clear();
 
+
   private :
 
   const GLchar* const load() const;
@@ -30,6 +32,7 @@ class stage
   bool compile_feedback() const;
 
   GLenum recognize_type() const;
+
 
   GLuint id_;
 

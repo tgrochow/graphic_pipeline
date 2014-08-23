@@ -6,9 +6,11 @@
 
 #include <vector>
 
+
 typedef std::vector<program>::iterator program_iterator;
 
 typedef std::vector<std::shared_ptr<stage> >::iterator stage_iterator;
+
 
 class pipeline
 {
@@ -24,13 +26,16 @@ class pipeline
 
   void link_programs();
 
+
   uniform_map uniforms_;
+
 
   private :
 
   program_iterator const find_program(std::string const&);
 
   stage_iterator const find_stage(std::string const&);
+
 
   std::vector<program> programs_;
 

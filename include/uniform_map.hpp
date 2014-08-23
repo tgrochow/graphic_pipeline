@@ -9,6 +9,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+
 struct uniform_link
 {
   inline uniform_link(GLuint id,std::string const& name) :
@@ -21,7 +22,9 @@ struct uniform_link
   std::string uniform_name_;
 };
 
+
 enum uniform_type {VEC2,VEC3,IVEC3,MAT4};
+
 
 class uniform_map
 {
@@ -36,9 +39,11 @@ class uniform_map
 
   bool aviable(std::string const&) const;
 
+
   private :
 
   std::shared_ptr<unsigned short> const id(std::string const&);
+
 
   std::map<std::string,std::shared_ptr<unsigned short> > names_;
   std::map<std::shared_ptr<unsigned short>,uniform_type> types_;
